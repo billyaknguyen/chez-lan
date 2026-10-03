@@ -3,7 +3,7 @@
    The owner gets one-click ACCEPT / DECLINE links that open a pre-written
    reply to the client, and can also just hit "Reply" (Reply-To = client). */
 const UBER_URL = "https://www.ubereats.com/ca/store/chez-lan-terrebonne/VFCgO5uMVUG-vYplW3tc1w";
-const RES_ENDPOINT = "https://formsubmit.co/ajax/minhtuan9@yahoo.com";
+const RES_ENDPOINT = "https://formsubmit.co/ajax/andypwndbunny@gmail.com";
 const RESTO_PHONE = "(450) 492-1416";
 
 // Seatings every 30 min, 16:15 -> 19:45 (kitchen closes 20:30)
@@ -210,7 +210,7 @@ ${q(declineSubj, declineBody)}
 💡 Astuce : vous pouvez aussi simplement « Répondre » à ce courriel, la réponse ira directement au client (${d.email}). Client joignable aussi au ${d.phone}.`,
     _template: "table",
     _captcha: "false",
-    _cc: "andypwndbunny@gmail.com",
+    _cc: "minhtuan9@yahoo.com",
     _honey: ""
   };
 }
