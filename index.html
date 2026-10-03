@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chez Lan · Cuisine vietnamienne à Terrebonne</title>
+<meta name="description" content="Chez Lan — authentique cuisine vietnamienne à Terrebonne. Grillades, soupes tonkinoises, vermicelles, rouleaux impériaux. Commandez en ligne ou appelez le (450) 492-1416.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">Chez <span>Lan</span></a>
+    <div class="nav-links">
+      <a href="#top" data-i18n="nav.home">Accueil</a>
+      <a href="#favoris" data-i18n="nav.menu">Menu</a>
+      <a href="#infos" data-i18n="nav.info">Nous trouver</a>
+    </div>
+    <div class="nav-cta">
+      <button class="lang-toggle" id="langBtn">EN</button>
+      <a class="btn order-link" href="#" target="_blank" rel="noopener" data-i18n="nav.order">Commander</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-content">
+    <span class="kicker" data-i18n="hero.kicker">Cuisine vietnamienne · Terrebonne</span>
+    <h1>Chez <em>Lan</em></h1>
+    <p class="lead" data-i18n="hero.sub">Grillades parfumées, soupes fumantes et rouleaux croustillants — une authentique cuisine vietnamienne au cœur de Terrebonne.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-gold" href="#menu" data-i18n="hero.cta1">Voir le menu</a>
+      <a class="btn btn-outline order-link" href="#" target="_blank" rel="noopener" data-i18n="hero.cta2">Commander en ligne</a>
+    </div>
+    <div class="rating">
+      <span class="stars">★★★★★</span>
+      <span data-i18n="hero.rating">4,7 ★ · plus de 800 avis sur Uber Eats</span>
+    </div>
+  </div>
+</header>
+
+<div class="offers">
+  <div class="wrap offers-track">
+    <div class="offer"><span class="tag" data-i18n="offer.bogo">2 pour 1</span><span>Soupe Wonton (L) · Salade au Poulet</span></div>
+    <div class="offer"><span class="tag" data-i18n="offer.free">Gratuit 40 $+</span><span>Wontons Frits (6 mcx)</span></div>
+  </div>
+</div>
+
+<section id="favoris">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="fav.title">Nos <em>favoris</em></h2>
+      <p data-i18n="fav.sub">Les plats les plus aimés de nos clients</p>
+    </div>
+    <div class="fav-grid" id="favGrid"></div>
+  </div>
+</section>
+
+<div class="band">
+  <div style="background-image:url('images/brochettes.jpg')"></div>
+  <div style="background-image:url('images/soupe.jpg')"></div>
+  <div style="background-image:url('images/rouleaux.jpg')"></div>
+</div>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="menu.title">Le <em>menu</em></h2>
+      <p data-i18n="menu.sub">Tout est préparé frais. Prix en dollars canadiens, taxes en sus.</p>
+    </div>
+    <div class="menu-controls" id="tabs"></div>
+    <div class="search-row">
+      <input class="search" id="search" data-i18n-ph="menu.search" placeholder="Rechercher un plat…">
+    </div>
+    <div id="menuList"></div>
+  </div>
+</section>
+
+<section id="infos">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="info.title">Nous <em>trouver</em></h2>
+      <p data-i18n="info.sub">À deux pas du chemin Gascon — passez nous voir ou commandez pour emporter.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-row">
+          <h4 data-i18n="info.addr">Adresse</h4>
+          <p>1421 Chemin Gascon, #2<br>Terrebonne, QC J6X 4L9</p>
+        </div>
+        <div class="info-row">
+          <h4 data-i18n="info.phone">Téléphone</h4>
+          <p><a href="tel:+14504921416">(450) 492-1416</a></p>
+        </div>
+        <div class="info-row">
+          <h4 data-i18n="info.hours">Heures d'ouverture</h4>
+          <div class="hours-line"><span data-i18n="info.everyday">Tous les jours</span><span data-i18n="info.hourval">16 h 15 – 20 h 30</span></div>
+        </div>
+        <div class="info-ctas">
+          <a class="btn" href="tel:+14504921416" data-i18n="info.call">Appeler</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=1421+Chemin+Gascon+Terrebonne+QC" target="_blank" rel="noopener" data-i18n="info.directions">Itinéraire</a>
+          <a class="btn btn-gold order-link" href="#" target="_blank" rel="noopener" data-i18n="info.order">Commander pour emporter</a>
+        </div>
+      </div>
+      <div class="map-frame">
+        <iframe title="Carte — Chez Lan, Terrebonne" loading="lazy"
+          src="https://www.google.com/maps?q=1421%20Chemin%20Gascon%2C%20Terrebonne%2C%20QC%20J6X%204L9&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="brand">Chez <span>Lan</span></span>
+    <p data-i18n="foot.note">Menu et prix tirés d'Uber Eats en octobre 2026 — sujets à changement. Appelez-nous pour confirmer.</p>
+    <p data-i18n="foot.rights">© 2026 Chez Lan · Terrebonne, Québec</p>
+  </div>
+</footer>
+
+<script src="menu.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
