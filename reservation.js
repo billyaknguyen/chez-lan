@@ -148,7 +148,6 @@ function buildOwnerEmail(d) {
   const timeEN = fmtTimeEN(d.time);
   const gFR = d.guests === 1 ? "1 personne" : `${d.guests} personnes`;
   const gEN = d.guests === 1 ? "1 guest" : `${d.guests} guests`;
-  const acceptSubj = "Confirmation de réservation / Reservation confirmed — Chez Lan";
   const acceptBody =
 `Bonjour ${d.name},
 
@@ -170,7 +169,6 @@ We look forward to welcoming you!
 Chez Lan
 1421 Chemin Gascon, Terrebonne
 ${RESTO_PHONE}`;
-  const declineSubj = "Votre demande de réservation / Your reservation request — Chez Lan";
   const declineBody =
 `Bonjour ${d.name},
 
@@ -190,7 +188,10 @@ Please call us at ${RESTO_PHONE} and we will be happy to find another time for y
 
 Thank you for your understanding,
 Chez Lan`;
-  const q = (s, b) => `mailto:${d.email}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+
+  // NOTE: no mailto: links here — Gmail doesn't linkify long mailto: URLs,
+  // so the owner gets clean copy-paste reply templates instead.
+  // Reply-To is the client (email field), so hitting "Reply" addresses them.
   return {
     _subject: `Nouvelle réservation — ${d.name} — ${dateFR} ${timeFR}`,
     Nom: d.name,
@@ -200,14 +201,21 @@ Chez Lan`;
     Heure: timeFR,
     Convives: gFR,
     Notes: d.notes || "—",
-    "Reponse rapide (cliquez un lien)":
-`✅ ACCEPTER — ouvre un courriel de confirmation pré-rempli au client :
-${q(acceptSubj, acceptBody)}
+    "Repondre au client — accepter ou refuser":
+`✅ POUR ACCEPTER :
+Appuyez sur « Répondre » (le courriel ira directement au client : ${d.email}), puis copiez-collez ce texte :
 
-❌ REFUSER — ouvre un courriel de refus pré-rempli au client :
-${q(declineSubj, declineBody)}
+${acceptBody}
 
-💡 Astuce : vous pouvez aussi simplement « Répondre » à ce courriel, la réponse ira directement au client (${d.email}). Client joignable aussi au ${d.phone}.`,
+———————————————
+
+❌ POUR REFUSER :
+Appuyez sur « Répondre », puis copiez-collez ce texte :
+
+${declineBody}
+
+———————————————
+Le client est aussi joignable par téléphone au ${d.phone}.`,
     _template: "table",
     _captcha: "false",
     _cc: "minhtuan9@yahoo.com",
