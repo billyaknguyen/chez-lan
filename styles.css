@@ -65,6 +65,11 @@ a { color: inherit; }
 }
 .lang-toggle:hover { color: var(--cream); border-color: var(--gold); }
 .nav-cta { display: flex; gap: 10px; align-items: center; }
+.nav-toggle {
+  display: none; background: transparent; border: 1px solid var(--line); color: var(--cream);
+  border-radius: 10px; padding: 8px 13px; font-size: 1.05rem; cursor: pointer; font-family: var(--font-body);
+}
+.nav-toggle:hover { border-color: var(--gold); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -268,6 +273,15 @@ footer .vn-divider { margin-bottom: 18px; }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.open {
+    display: flex; position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(10, 24, 48, 0.98); backdrop-filter: blur(12px);
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 8px 20px 16px; border-bottom: 1px solid var(--line);
+  }
+  .nav-links.open a { padding: 12px 0; font-size: 1.02rem; border-bottom: 1px solid rgba(147,180,226,0.1); }
+  .nav-links.open a:last-child { border-bottom: none; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-photo { order: -1; }
   .hero-photo img { width: min(280px, 80%); }

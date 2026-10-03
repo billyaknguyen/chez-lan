@@ -256,6 +256,12 @@ async function onSubmit(ev) {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".order-link").forEach((a) => (a.href = UBER_URL));
+  const navToggle = $("#navToggle");
+  const navLinks = document.querySelector(".nav-links");
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", (e) => { e.stopPropagation(); navLinks.classList.toggle("open"); });
+    navLinks.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => navLinks.classList.remove("open")));
+  }
   const dateEl = $("#fDate");
   const today = todayISO();
   const max = new Date();
