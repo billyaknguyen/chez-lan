@@ -108,15 +108,6 @@ a { color: inherit; }
 }
 .hero-photo figcaption { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 12px; }
 
-/* ---------- Offers strip ---------- */
-.offers {
-  background: linear-gradient(90deg, var(--blue-deep), var(--blue), var(--blue-deep));
-  padding: 16px 0; border-top: 1px solid var(--gold-soft); border-bottom: 1px solid var(--gold-soft);
-}
-.offers-track { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
-.offer { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; font-weight: 600; }
-.offer .tag { background: var(--gold); color: #1c140d; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 1px; }
-
 /* ---------- Sections ---------- */
 section { padding: 84px 0; position: relative; }
 .sec-head { text-align: center; max-width: 640px; margin: 0 auto 46px; }
