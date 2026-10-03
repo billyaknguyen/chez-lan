@@ -21,7 +21,7 @@ const I18N = {
     "badge.bogo": "2 pour 1", "badge.free40": "Gratuit · 40 $+", "badge.pop": "Populaire",
     "info.title": "Nous <em>trouver</em>", "info.sub": "À deux pas du chemin Gascon — passez nous voir ou commandez pour emporter.",
     "info.addr": "Adresse", "info.phone": "Téléphone", "info.hours": "Heures d'ouverture",
-    "info.everyday": "Tous les jours", "info.hourval": "16 h 15 – 20 h 30",
+    "info.everyday": "Tous les jours", "info.hourval": "16 h 00 – 21 h 00",
     "info.call": "Appeler", "info.directions": "Itinéraire", "info.order": "Commander pour emporter",
     "foot.note": "Menu et prix tirés d'Uber Eats en octobre 2026 — sujets à changement. Appelez-nous pour confirmer.",
     "foot.rights": "© 2026 Chez Lan · Terrebonne, Québec"
@@ -42,7 +42,7 @@ const I18N = {
     "badge.bogo": "Buy 1 get 1", "badge.free40": "Free · $40+", "badge.pop": "Popular",
     "info.title": "Find <em>us</em>", "info.sub": "Just off Chemin Gascon — stop by or order takeout.",
     "info.addr": "Address", "info.phone": "Phone", "info.hours": "Opening hours",
-    "info.everyday": "Every day", "info.hourval": "4:15 PM – 8:30 PM",
+    "info.everyday": "Every day", "info.hourval": "4:00 PM – 9:00 PM",
     "info.call": "Call us", "info.directions": "Directions", "info.order": "Order takeout",
     "foot.note": "Menu and prices taken from Uber Eats in October 2026 — subject to change. Call us to confirm.",
     "foot.rights": "© 2026 Chez Lan · Terrebonne, Quebec"

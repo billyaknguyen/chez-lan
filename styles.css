@@ -1,5 +1,5 @@
 /* Chez Lan — blue porcelain theme. Deep sea navy + cobalt + gold,
-   with a faint Vietnamese brocade diamond pattern. */
+   with a faint hand-drawn Vietnamese lotus (hoa sen) background. */
 :root {
   --bg: #0a1830;
   --bg2: #0d1f3d;
@@ -15,7 +15,8 @@
   --radius: 14px;
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Be Vietnam Pro", "Inter", system-ui, sans-serif;
-  --brocade: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52'%3E%3Cpath d='M26 7 L45 26 L26 45 L7 26 Z' fill='none' stroke='%23d9a441' stroke-opacity='0.06'/%3E%3Ccircle cx='26' cy='26' r='1.6' fill='%23d9a441' fill-opacity='0.05'/%3E%3C/svg%3E");
+  /* Subtle Vietnamese lotus rosette (hoa sen) tile, hand-drawn SVG */
+  --lotus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23d9a441' stroke-opacity='0.08'%3E%3Ccircle cx='60' cy='60' r='36'/%3E%3Ccircle cx='60' cy='60' r='26'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(45 60 60)'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(90 60 60)'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(135 60 60)'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(180 60 60)'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(225 60 60)'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(270 60 60)'/%3E%3Cpath d='M60 24 C67 35 67 47 60 56 C53 47 53 35 60 24 Z' transform='rotate(315 60 60)'/%3E%3C/g%3E%3Cg fill='%23d9a441' fill-opacity='0.05'%3E%3Ccircle cx='10' cy='10' r='1.8'/%3E%3Ccircle cx='110' cy='10' r='1.8'/%3E%3Ccircle cx='10' cy='110' r='1.8'/%3E%3Ccircle cx='110' cy='110' r='1.8'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,6 +24,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   background: var(--bg);
+  background-image: var(--lotus);
   color: var(--cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -82,7 +84,7 @@ a { color: inherit; }
 }
 .hero::before {
   content: ""; position: absolute; inset: 0;
-  background-image: var(--brocade);
+  background-image: var(--lotus);
   pointer-events: none;
 }
 .hero-grid {
@@ -152,7 +154,7 @@ section { padding: 84px 0; position: relative; }
 
 /* ---------- Menu ---------- */
 #menu { background: var(--bg2); }
-#menu::before { content: ""; position: absolute; inset: 0; background-image: var(--brocade); opacity: 0.5; pointer-events: none; }
+#menu::before { content: ""; position: absolute; inset: 0; background-image: var(--lotus); opacity: 0.5; pointer-events: none; }
 #menu .wrap { position: relative; }
 .menu-controls {
   display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
@@ -228,7 +230,7 @@ section { padding: 84px 0; position: relative; }
 /* ---------- Reservation ---------- */
 .res-hero { padding: 130px 0 10px; background:
   radial-gradient(900px 400px at 80% 0%, rgba(47, 111, 208, 0.22), transparent 60%), var(--bg); }
-.res-hero::before { content: ""; position: absolute; inset: 0; background-image: var(--brocade); pointer-events: none; }
+.res-hero::before { content: ""; position: absolute; inset: 0; background-image: var(--lotus); pointer-events: none; }
 .res-hero .wrap { position: relative; }
 .res-main { padding-top: 40px; }
 .res-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 26px; align-items: start; }

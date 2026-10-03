@@ -6,8 +6,8 @@ const UBER_URL = "https://www.ubereats.com/ca/store/chez-lan-terrebonne/VFCgO5uM
 const RES_ENDPOINT = "https://formsubmit.co/ajax/andypwndbunny@gmail.com";
 const RESTO_PHONE = "(450) 492-1416";
 
-// Seatings every 30 min, 16:15 -> 19:45 (kitchen closes 20:30)
-const SLOTS = ["16:15", "16:45", "17:15", "17:45", "18:15", "18:45", "19:15", "19:45"];
+// Seatings every 30 min, 16:00 -> 20:00 (restaurant closes 21:00)
+const SLOTS = ["16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"];
 const MAX_DAYS_AHEAD = 60;
 
 const I18N = {
@@ -31,7 +31,7 @@ const I18N = {
     "res.errorFields": "Veuillez remplir tous les champs requis correctement.",
     "res.todayFull": "Complet pour aujourd'hui — veuillez choisir une autre date.",
     "res.infoT": "Bon à savoir",
-    "res.hours": "Ouvert tous les jours · 16 h 15 – 20 h 30",
+    "res.hours": "Ouvert tous les jours · 16 h 00 – 21 h 00",
     "res.bigparty": "11 convives ou plus? Appelez-nous directement!",
     "info.phone": "Téléphone", "info.addr": "Adresse",
     "foot.note": "Menu et prix tirés d'Uber Eats en octobre 2026 — sujets à changement. Appelez-nous pour confirmer.",
@@ -57,7 +57,7 @@ const I18N = {
     "res.errorFields": "Please fill in all required fields correctly.",
     "res.todayFull": "Fully booked for today — please pick another date.",
     "res.infoT": "Good to know",
-    "res.hours": "Open daily · 4:15 PM – 8:30 PM",
+    "res.hours": "Open daily · 4:00 PM – 9:00 PM",
     "res.bigparty": "Party of 11 or more? Call us directly!",
     "info.phone": "Phone", "info.addr": "Address",
     "foot.note": "Menu and prices taken from Uber Eats in October 2026 — subject to change. Call us to confirm.",
