@@ -1,5 +1,8 @@
-/* Chez Lan site — rendering + FR/EN toggle */
+/* Chez Lan site — rendering + FR/EN toggle.
+   Photos come only from Uber Eats (real dish photos). No AI images.
+   HERO_IMG: set to a real Uber Eats photo URL to show it in the hero; empty = no photo. */
 const UBER_URL = "https://www.ubereats.com/ca/store/chez-lan-terrebonne/VFCgO5uMVUG-vYplW3tc1w";
+const HERO_IMG = "https://tb-static.uber.com/prod/image-proc/processed_images/1910c130eae8edf2dc6b7b0a0e17ae5f/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg";
 
 const I18N = {
   fr: {
@@ -8,6 +11,7 @@ const I18N = {
     "hero.sub": "Grillades parfumées, soupes fumantes et rouleaux croustillants — une authentique cuisine vietnamienne au cœur de Terrebonne.",
     "hero.cta1": "Voir le menu", "hero.cta2": "Commander en ligne",
     "hero.rating": "4,7 ★ · plus de 800 avis sur Uber Eats",
+    "hero.photocap": "Photo : Uber Eats",
     "offers.t": "Offres en cours",
     "offer.bogo": "2 pour 1",
     "offer.free": "Gratuit 40 $+",
@@ -28,6 +32,7 @@ const I18N = {
     "hero.sub": "Fragrant grilled dishes, steaming soups and crispy rolls — authentic Vietnamese cuisine in the heart of Terrebonne.",
     "hero.cta1": "See the menu", "hero.cta2": "Order online",
     "hero.rating": "4.7 ★ · 800+ reviews on Uber Eats",
+    "hero.photocap": "Photo: Uber Eats",
     "offers.t": "Current offers",
     "offer.bogo": "Buy 1 get 1",
     "offer.free": "Free on $40+",
@@ -65,8 +70,9 @@ function likeHTML(r) {
 function renderFeatured() {
   $("#favGrid").innerHTML = FEATURED.map(f => `
     <div class="fav-card">
-      <div class="fav-img" style="background-image:url('${f.img}')"><span class="fav-rank">${f.tag}</span></div>
+      ${f.img ? `<div class="fav-img" style="background-image:url('${f.img}')"><span class="fav-rank">${f.tag}</span></div>` : ""}
       <div class="fav-body">
+        ${f.img ? "" : `<span class="fav-rank" style="position:static;display:inline-block;margin-bottom:10px">${f.tag}</span>`}
         <h3>${f.n}</h3>
         <div class="fav-meta"><span class="price">${priceFmt(f.p)}</span>${likeHTML(f.r)}</div>
       </div>
@@ -103,9 +109,12 @@ function renderMenu() {
       <div class="dish-grid">` +
       items.map(i => `
         <div class="dish">
+          ${i.img ? `<img class="dish-thumb" src="${i.img}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}
+          <div class="dish-main">
           <div class="dish-top"><h3>${i.n}</h3><span class="price">${priceFmt(i.p)}</span></div>
           ${i.d ? `<p>${i.d}</p>` : ""}
           <div class="dish-foot">${badgeHTML(i.badge)}${likeHTML(i.r)}</div>
+          </div>
         </div>`).join("") +
       `</div></div>`;
   });
@@ -127,6 +136,11 @@ function applyLang() {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".order-link").forEach(a => a.href = UBER_URL);
+  if (HERO_IMG) {
+    $("#heroImg").src = HERO_IMG;
+    $("#heroPhoto").style.display = "flex";
+    $("#heroGrid").classList.remove("no-photo");
+  }
   $("#langBtn").addEventListener("click", () => { lang = lang === "fr" ? "en" : "fr"; applyLang(); });
   $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderMenu(); });
   applyLang();
