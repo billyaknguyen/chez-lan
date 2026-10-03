@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réserver une table · Chez Lan Terrebonne</title>
+<meta name="description" content="Réservez une table au restaurant Chez Lan à Terrebonne. Choisissez votre date et votre heure — nous vous confirmerons par courriel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">Chez <span>Lan</span></a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav.home">Accueil</a>
+      <a href="index.html#favoris" data-i18n="nav.menu">Menu</a>
+      <a href="index.html#infos" data-i18n="nav.info">Nous trouver</a>
+      <a href="reservation.html" data-i18n="nav.book" style="color:var(--gold)">Réserver</a>
+    </div>
+    <div class="nav-cta">
+      <button class="lang-toggle" id="langBtn">EN</button>
+      <a class="btn order-link" href="#" target="_blank" rel="noopener" data-i18n="nav.order">Commander</a>
+    </div>
+  </div>
+</nav>
+
+<section class="res-hero">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="vn-divider" aria-hidden="true">
+        <svg width="34" height="22" viewBox="0 0 34 22"><path d="M17 2 L32 11 L17 20 L2 11 Z" fill="none" stroke="#d9a441" stroke-width="1.4"/><circle cx="17" cy="11" r="2.2" fill="#d9a441"/></svg>
+      </div>
+      <h2 data-i18n="res.title">Réserver une <em>table</em></h2>
+      <p data-i18n="res.sub">Choisissez votre date et votre heure — nous vous confirmerons par courriel.</p>
+    </div>
+  </div>
+</section>
+
+<section class="res-main">
+  <div class="wrap">
+    <div class="res-grid">
+      <div class="res-card">
+        <form id="resForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="fDate" data-i18n="res.date">Date</label>
+              <input type="date" id="fDate" required>
+            </div>
+            <div class="field">
+              <label for="fTime" data-i18n="res.time">Heure</label>
+              <select id="fTime" required></select>
+            </div>
+            <div class="field">
+              <label for="fGuests" data-i18n="res.guests">Convives</label>
+              <select id="fGuests" required></select>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fName" data-i18n="res.name">Nom</label>
+              <input type="text" id="fName" data-i18n-ph="res.namePh" placeholder="Votre nom" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="fPhone" data-i18n="res.phone">Téléphone</label>
+              <input type="tel" id="fPhone" placeholder="(450) 123-4567" required autocomplete="tel">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fEmail" data-i18n="res.email">Courriel</label>
+            <input type="email" id="fEmail" data-i18n-ph="res.emailPh" placeholder="vous@exemple.com" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="fNotes" data-i18n="res.notes">Notes (optionnel)</label>
+            <textarea id="fNotes" rows="3" data-i18n-ph="res.notesPh" placeholder="Allergies, poussette, occasion spéciale…"></textarea>
+          </div>
+          <input type="text" id="fHoney" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <p class="form-error" id="formError" style="display:none"></p>
+          <button type="submit" class="btn btn-gold btn-block" id="submitBtn" data-i18n="res.submit">Envoyer la demande</button>
+          <p class="res-note" data-i18n="res.note">Nous vous répondrons par courriel pour confirmer votre réservation.</p>
+        </form>
+        <div class="res-success" id="resSuccess" style="display:none">
+          <div class="success-check">✓</div>
+          <h3 data-i18n="res.successT">Demande envoyée!</h3>
+          <p id="successSummary"></p>
+          <button class="btn btn-outline" id="againBtn" data-i18n="res.new">Faire une autre demande</button>
+        </div>
+      </div>
+      <aside class="info-card res-aside">
+        <div class="info-row">
+          <h4 data-i18n="res.infoT">Bon à savoir</h4>
+          <p data-i18n="res.hours">Ouvert tous les jours · 16 h 15 – 20 h 30</p>
+        </div>
+        <div class="info-row">
+          <h4 data-i18n="info.phone">Téléphone</h4>
+          <p><a href="tel:+14504921416">(450) 492-1416</a></p>
+        </div>
+        <div class="info-row">
+          <h4 data-i18n="info.addr">Adresse</h4>
+          <p>1421 Chemin Gascon, #2<br>Terrebonne, QC J6X 4L9</p>
+        </div>
+        <div class="info-row">
+          <p class="res-note" data-i18n="res.bigparty">11 convives ou plus? Appelez-nous directement!</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="vn-divider" aria-hidden="true">
+      <svg width="34" height="22" viewBox="0 0 34 22"><path d="M17 2 L32 11 L17 20 L2 11 Z" fill="none" stroke="#d9a441" stroke-width="1.4"/><circle cx="17" cy="11" r="2.2" fill="#d9a441"/></svg>
+    </div>
+    <span class="brand">Chez <span>Lan</span></span>
+    <p data-i18n="foot.note">Menu et prix tirés d'Uber Eats en octobre 2026 — sujets à changement. Appelez-nous pour confirmer.</p>
+    <p data-i18n="foot.rights">© 2026 Chez Lan · Terrebonne, Québec</p>
+  </div>
+</footer>
+
+<script src="reservation.js"></script>
+</body>
+</html>

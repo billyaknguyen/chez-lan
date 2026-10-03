@@ -6,7 +6,7 @@ const HERO_IMG = "https://tb-static.uber.com/prod/image-proc/processed_images/19
 
 const I18N = {
   fr: {
-    "nav.home": "Accueil", "nav.menu": "Menu", "nav.info": "Nous trouver", "nav.order": "Commander",
+    "nav.home": "Accueil", "nav.menu": "Menu", "nav.info": "Nous trouver", "nav.book": "Réserver", "nav.order": "Commander",
     "hero.kicker": "Cuisine vietnamienne · Terrebonne",
     "hero.sub": "Grillades parfumées, soupes fumantes et rouleaux croustillants — une authentique cuisine vietnamienne au cœur de Terrebonne.",
     "hero.cta1": "Voir le menu", "hero.cta2": "Commander en ligne",
@@ -27,7 +27,7 @@ const I18N = {
     "foot.rights": "© 2026 Chez Lan · Terrebonne, Québec"
   },
   en: {
-    "nav.home": "Home", "nav.menu": "Menu", "nav.info": "Find us", "nav.order": "Order",
+    "nav.home": "Home", "nav.menu": "Menu", "nav.info": "Find us", "nav.book": "Book a table", "nav.order": "Order",
     "hero.kicker": "Vietnamese cuisine · Terrebonne",
     "hero.sub": "Fragrant grilled dishes, steaming soups and crispy rolls — authentic Vietnamese cuisine in the heart of Terrebonne.",
     "hero.cta1": "See the menu", "hero.cta2": "Order online",
