@@ -74,6 +74,12 @@ function fmtTime(hhmm) {
   const h12 = h % 12 === 0 ? 12 : h % 12;
   return `${h12}:${String(m).padStart(2, "0")} ${ap}`;
 }
+function fmtTimeEN(hhmm) {
+  const [h, m] = hhmm.split(":").map(Number);
+  const ap = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 === 0 ? 12 : h % 12;
+  return `${h12}:${String(m).padStart(2, "0")} ${ap}`;
+}
 function fmtDateLong(iso) {
   const d = new Date(iso + "T12:00:00");
   return d.toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA",
@@ -134,28 +140,53 @@ function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
 function buildOwnerEmail(d) {
   const dateFR = new Date(d.date + "T12:00:00")
     .toLocaleDateString("fr-CA", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const dateEN = new Date(d.date + "T12:00:00")
+    .toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const timeFR = d.time.replace(":", " h ");
-  const g = d.guests === 1 ? "1 personne" : `${d.guests} personnes`;
-  const acceptSubj = "Confirmation de réservation — Chez Lan";
+  const timeEN = fmtTimeEN(d.time);
+  const gFR = d.guests === 1 ? "1 personne" : `${d.guests} personnes`;
+  const gEN = d.guests === 1 ? "1 guest" : `${d.guests} guests`;
+  const acceptSubj = "Confirmation de réservation / Reservation confirmed — Chez Lan";
   const acceptBody =
 `Bonjour ${d.name},
 
-Bonne nouvelle! Votre réservation pour ${g} le ${dateFR} à ${timeFR} au restaurant Chez Lan est confirmée.
+Bonne nouvelle! Votre réservation pour ${gFR} le ${dateFR} à ${timeFR} au restaurant Chez Lan est confirmée.
 
 Au plaisir de vous accueillir!
 
 Chez Lan
 1421 Chemin Gascon, Terrebonne
+${RESTO_PHONE}
+
+---
+Hello ${d.name},
+
+Good news! Your reservation for ${gEN} on ${dateEN} at ${timeEN} at Chez Lan restaurant is confirmed.
+
+We look forward to welcoming you!
+
+Chez Lan
+1421 Chemin Gascon, Terrebonne
 ${RESTO_PHONE}`;
-  const declineSubj = "Votre demande de réservation — Chez Lan";
+  const declineSubj = "Votre demande de réservation / Your reservation request — Chez Lan";
   const declineBody =
 `Bonjour ${d.name},
 
-Malheureusement, nous ne pouvons pas accepter votre demande de réservation pour ${g} le ${dateFR} à ${timeFR}.
+Malheureusement, nous ne pouvons pas accepter votre demande de réservation pour ${gFR} le ${dateFR} à ${timeFR}.
 
 Appelez-nous au ${RESTO_PHONE} et il nous fera plaisir de vous trouver un autre moment.
 
 Merci de votre compréhension,
+Chez Lan
+
+---
+Hello ${d.name},
+
+Unfortunately, we cannot accept your reservation request for ${gEN} on ${dateEN} at ${timeEN}.
+
+Please call us at ${RESTO_PHONE} and we will be happy to find another time for you.
+
+Thank you for your understanding,
 Chez Lan`;
   const q = (s, b) => `mailto:${d.email}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
   return {
@@ -165,7 +196,7 @@ Chez Lan`;
     email: d.email, // also sets Reply-To so the owner can just hit "Reply"
     Date: dateFR,
     Heure: timeFR,
-    Convives: g,
+    Convives: gFR,
     Notes: d.notes || "—",
     "Reponse rapide (cliquez un lien)":
 `✅ ACCEPTER — ouvre un courriel de confirmation pré-rempli au client :
