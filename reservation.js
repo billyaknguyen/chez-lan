@@ -27,6 +27,7 @@ const I18N = {
     "res.successT": "Demande envoyée!",
     "res.new": "Faire une autre demande",
     "res.errorSend": "Oups — l'envoi a échoué. Vérifiez votre connexion ou appelez-nous au (450) 492-1416.",
+    "res.errorActivation": "Notre système de réservation est en cours d'activation. Appelez-nous au (450) 492-1416 et c'est avec plaisir que nous prendrons votre réservation!",
     "res.errorFields": "Veuillez remplir tous les champs requis correctement.",
     "res.todayFull": "Complet pour aujourd'hui — veuillez choisir une autre date.",
     "res.infoT": "Bon à savoir",
@@ -52,6 +53,7 @@ const I18N = {
     "res.successT": "Request sent!",
     "res.new": "Make another request",
     "res.errorSend": "Oops — sending failed. Check your connection or call us at (450) 492-1416.",
+    "res.errorActivation": "Our booking system is being activated. Please call us at (450) 492-1416 and we'll gladly take your reservation!",
     "res.errorFields": "Please fill in all required fields correctly.",
     "res.todayFull": "Fully booked for today — please pick another date.",
     "res.infoT": "Good to know",
@@ -238,7 +240,11 @@ async function onSubmit(ev) {
       body: JSON.stringify(buildOwnerEmail(d))
     });
     const data = await res.json().catch(() => ({}));
-    if (!res.ok || data.success === "false" || data.success === false) throw new Error("send failed");
+    const okSend = res.ok && data.success !== "false" && data.success !== false;
+    if (!okSend) {
+      const msg = String(data.message || "").toLowerCase();
+      throw new Error(msg.includes("activation") ? "activation" : "send");
+    }
     $("#resForm").style.display = "none";
     $("#successSummary").textContent =
       lang === "fr"
@@ -247,7 +253,7 @@ async function onSubmit(ev) {
     $("#resSuccess").style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (e) {
-    showError(t("res.errorSend"));
+    showError(e.message === "activation" ? t("res.errorActivation") : t("res.errorSend"));
   } finally {
     btn.disabled = false;
     btn.textContent = t("res.submit");
