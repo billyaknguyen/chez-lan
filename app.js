@@ -90,6 +90,9 @@ function renderTabs() {
   document.querySelectorAll(".tab").forEach(b =>
     b.addEventListener("click", () => { activeCat = b.dataset.cat; renderTabs(); renderMenu(); })
   );
+  // keep the active tab visible in the horizontal strip (mobile)
+  const activeBtn = document.querySelector(".tab.active");
+  if (activeBtn) activeBtn.scrollIntoView({ inline: "center", block: "nearest" });
 }
 
 function dishMatches(item) {

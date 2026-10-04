@@ -293,3 +293,37 @@ footer .vn-divider { margin-bottom: 18px; }
   .menu-controls { top: 60px; }
   section { padding: 60px 0; }
 }
+
+/* ---------- Small phones: slim sticky category strip ---------- */
+@media (max-width: 640px) {
+  .menu-controls {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x proximity;
+    gap: 8px;
+    padding: 10px 12px;
+    /* full-bleed sticky strip */
+    margin: 0 -20px 14px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .menu-controls::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: none;
+    scroll-snap-align: start;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+  .dish-grid { grid-template-columns: 1fr; }
+  .dish { padding: 12px 14px; gap: 12px; }
+  .dish-thumb { width: 56px; height: 56px; }
+  .cat-title { font-size: 1.32rem; }
+  .cat-block { margin-bottom: 32px; }
+  .search-row { margin-bottom: 20px; }
+  section { padding: 44px 0; }
+}
