@@ -7,8 +7,8 @@
 <meta name="description" content="Chez Lan — authentique cuisine vietnamienne à Terrebonne. Grillades, soupes tonkinoises, vermicelles, rouleaux impériaux. Commandez en ligne ou appelez le (450) 492-1416.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500;1,9..144,700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 
@@ -30,27 +30,22 @@
 </nav>
 
 <header class="hero" id="top">
-  <div class="wrap">
-    <div class="hero-grid no-photo" id="heroGrid">
-      <div class="hero-content">
-        <span class="kicker" data-i18n="hero.kicker">Cuisine vietnamienne · Terrebonne</span>
-        <h1>Chez <em>Lan</em></h1>
-        <p class="lead" data-i18n="hero.sub">Grillades parfumées, soupes fumantes et rouleaux croustillants — une authentique cuisine vietnamienne au cœur de Terrebonne.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-gold" href="#menu" data-i18n="hero.cta1">Voir le menu</a>
-          <a class="btn btn-outline order-link" href="#" target="_blank" rel="noopener" data-i18n="hero.cta2">Commander en ligne</a>
-        </div>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span data-i18n="hero.rating">4,7 ★ · plus de 800 avis sur Uber Eats</span>
-        </div>
-      </div>
-      <figure class="hero-photo" id="heroPhoto" style="display:none">
-        <div>
-          <img id="heroImg" src="" alt="Chez Lan" referrerpolicy="no-referrer">
-          <figcaption data-i18n="hero.photocap">Photo : Uber Eats</figcaption>
-        </div>
-      </figure>
+  <img class="hero-bg" id="heroBg" src="" alt="La salle chaleureuse du restaurant Chez Lan" referrerpolicy="no-referrer">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-badge">
+      <svg width="30" height="20" viewBox="0 0 34 22" aria-hidden="true"><path d="M17 2 L32 11 L17 20 L2 11 Z" fill="none" stroke="#d9a441" stroke-width="1.4"/><circle cx="17" cy="11" r="2.2" fill="#d9a441"/></svg>
+      <span data-i18n="hero.badge">Cuisine vietnamienne authentique</span>
+    </div>
+    <h1 class="hero-title" data-i18n="hero.title"></h1>
+    <p class="hero-sub" data-i18n="hero.sub"></p>
+    <div class="hero-ctas">
+      <a class="btn btn-red" href="reservation.html" data-i18n="hero.ctaBook">Réserver une table</a>
+      <a class="btn btn-ghostlight" href="#menu" data-i18n="hero.cta1">Voir le menu</a>
+    </div>
+    <div class="hero-foot">
+      <span class="rating"><span class="stars">★★★★★</span> <span data-i18n="hero.rating">4,7 ★ · plus de 800 avis sur Uber Eats</span></span>
+      <span class="hero-sig">Chez Lan</span>
     </div>
   </div>
 </header>
@@ -133,7 +128,7 @@
   </div>
 </footer>
 
-<script src="menu.js?v=3"></script>
-<script src="app.js?v=3"></script>
+<script src="menu.js?v=4"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

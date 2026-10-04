@@ -7,11 +7,11 @@ const HERO_IMG = "https://tb-static.uber.com/prod/image-proc/processed_images/19
 const I18N = {
   fr: {
     "nav.home": "Accueil", "nav.menu": "Menu", "nav.info": "Nous trouver", "nav.book": "Réserver", "nav.order": "Commander",
-    "hero.kicker": "Cuisine vietnamienne · Terrebonne",
-    "hero.sub": "Grillades parfumées, soupes fumantes et rouleaux croustillants — une authentique cuisine vietnamienne au cœur de Terrebonne.",
-    "hero.cta1": "Voir le menu", "hero.cta2": "Commander en ligne",
+    "hero.badge": "Cuisine vietnamienne authentique",
+    "hero.title": "L'âme du Vietnam, <span class=\"script\">servie avec cœur</span><br>au cœur de Terrebonne.",
+    "hero.sub": "Grillades parfumées, bouillons réconfortants et rouleaux croustillants — préparés frais chaque jour.",
+    "hero.cta1": "Voir le menu", "hero.ctaBook": "Réserver une table",
     "hero.rating": "4,7 ★ · plus de 800 avis sur Uber Eats",
-    "hero.photocap": "Photo : Uber Eats",
     "offers.t": "Offres en cours",
     "offer.bogo": "2 pour 1",
     "offer.free": "Gratuit 40 $+",
@@ -28,11 +28,11 @@ const I18N = {
   },
   en: {
     "nav.home": "Home", "nav.menu": "Menu", "nav.info": "Find us", "nav.book": "Book a table", "nav.order": "Order",
-    "hero.kicker": "Vietnamese cuisine · Terrebonne",
-    "hero.sub": "Fragrant grilled dishes, steaming soups and crispy rolls — authentic Vietnamese cuisine in the heart of Terrebonne.",
-    "hero.cta1": "See the menu", "hero.cta2": "Order online",
+    "hero.badge": "Authentic Vietnamese cuisine",
+    "hero.title": "The soul of Vietnam, <span class=\"script\">served with heart</span><br>in the heart of Terrebonne.",
+    "hero.sub": "Fragrant grills, comforting broths and crispy rolls — prepared fresh every day.",
+    "hero.cta1": "See the menu", "hero.ctaBook": "Reserve a table",
     "hero.rating": "4.7 ★ · 800+ reviews on Uber Eats",
-    "hero.photocap": "Photo: Uber Eats",
     "offers.t": "Current offers",
     "offer.bogo": "Buy 1 get 1",
     "offer.free": "Free on $40+",
@@ -149,9 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
   if (HERO_IMG) {
-    $("#heroImg").src = HERO_IMG;
-    $("#heroPhoto").style.display = "flex";
-    $("#heroGrid").classList.remove("no-photo");
+    $("#heroBg").src = HERO_IMG;
   }
   $("#langBtn").addEventListener("click", () => { lang = lang === "fr" ? "en" : "fr"; applyLang(); });
   $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderMenu(); });
