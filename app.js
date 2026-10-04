@@ -1,8 +1,6 @@
 /* Chez Lan site — rendering + FR/EN toggle.
-   Photos come only from Uber Eats (real dish photos). No AI images.
-   HERO_IMG: set to a real Uber Eats photo URL to show it in the hero; empty = no photo. */
+   Photos come only from Uber Eats (real dish photos). No AI images. */
 const UBER_URL = "https://www.ubereats.com/ca/store/chez-lan-terrebonne/VFCgO5uMVUG-vYplW3tc1w";
-const HERO_IMG = "https://tb-static.uber.com/prod/image-proc/processed_images/1910c130eae8edf2dc6b7b0a0e17ae5f/3ac2b39ad528f8c8c5dc77c59abb683d.jpeg";
 
 const I18N = {
   fr: {
@@ -147,9 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", (e) => {
       if (!navLinks.contains(e.target)) navLinks.classList.remove("open");
     });
-  }
-  if (HERO_IMG) {
-    $("#heroBg").src = HERO_IMG;
   }
   $("#langBtn").addEventListener("click", () => { lang = lang === "fr" ? "en" : "fr"; applyLang(); });
   $("#search").addEventListener("input", e => { query = e.target.value.trim().toLowerCase(); renderMenu(); });
