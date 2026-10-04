@@ -53,7 +53,7 @@
             </div>
             <div class="field">
               <label for="fTime" data-i18n="res.time">Heure</label>
-              <select id="fTime" required></select>
+              <input type="time" id="fTime" min="16:00" max="21:00" required>
             </div>
             <div class="field">
               <label for="fGuests" data-i18n="res.guests">Convives</label>
@@ -122,6 +122,7 @@
   </div>
 </footer>
 
+<script src="templates.js?v=2"></script>
 <script src="reservation.js?v=2"></script>
 </body>
 </html>

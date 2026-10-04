@@ -4,10 +4,10 @@
    reply to the client, and can also just hit "Reply" (Reply-To = client). */
 const UBER_URL = "https://www.ubereats.com/ca/store/chez-lan-terrebonne/VFCgO5uMVUG-vYplW3tc1w";
 const RES_ENDPOINT = "https://formsubmit.co/ajax/andypwndbunny@gmail.com";
-const RESTO_PHONE = "(450) 492-1416";
+// (RESTO_PHONE comes from templates.js)
 
-// Seatings every 30 min, 16:00 -> 20:00 (restaurant closes 21:00)
-const SLOTS = ["16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"];
+// Free time choice: any time between 16:00 and 21:00 (restaurant hours)
+const OPEN_MIN = 16 * 60, CLOSE_MIN = 21 * 60;
 const MAX_DAYS_AHEAD = 60;
 
 const I18N = {
@@ -29,7 +29,7 @@ const I18N = {
     "res.errorSend": "Oups — l'envoi a échoué. Vérifiez votre connexion ou appelez-nous au (450) 492-1416.",
     "res.errorActivation": "Notre système de réservation est en cours d'activation. Appelez-nous au (450) 492-1416 et c'est avec plaisir que nous prendrons votre réservation!",
     "res.errorFields": "Veuillez remplir tous les champs requis correctement.",
-    "res.todayFull": "Complet pour aujourd'hui — veuillez choisir une autre date.",
+    "res.badTime": "Veuillez choisir une heure entre 16 h 00 et 21 h 00 (au moins 1 h à l'avance pour aujourd'hui).",
     "res.infoT": "Bon à savoir",
     "res.hours": "Ouvert tous les jours · 16 h 00 – 21 h 00",
     "res.bigparty": "11 convives ou plus? Appelez-nous directement!",
@@ -55,7 +55,7 @@ const I18N = {
     "res.errorSend": "Oops — sending failed. Check your connection or call us at (450) 492-1416.",
     "res.errorActivation": "Our booking system is being activated. Please call us at (450) 492-1416 and we'll gladly take your reservation!",
     "res.errorFields": "Please fill in all required fields correctly.",
-    "res.todayFull": "Fully booked for today — please pick another date.",
+    "res.badTime": "Please pick a time between 4:00 PM and 9:00 PM (at least 1h ahead for today).",
     "res.infoT": "Good to know",
     "res.hours": "Open daily · 4:00 PM – 9:00 PM",
     "res.bigparty": "Party of 11 or more? Call us directly!",
@@ -76,12 +76,6 @@ function fmtTime(hhmm) {
   const h12 = h % 12 === 0 ? 12 : h % 12;
   return `${h12}:${String(m).padStart(2, "0")} ${ap}`;
 }
-function fmtTimeEN(hhmm) {
-  const [h, m] = hhmm.split(":").map(Number);
-  const ap = h >= 12 ? "PM" : "AM";
-  const h12 = h % 12 === 0 ? 12 : h % 12;
-  return `${h12}:${String(m).padStart(2, "0")} ${ap}`;
-}
 function fmtDateLong(iso) {
   const d = new Date(iso + "T12:00:00");
   return d.toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA",
@@ -94,24 +88,17 @@ function todayISO() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
-function availableSlots(iso, now = new Date()) {
-  if (iso !== todayISO()) return SLOTS.slice();
-  const cutoff = now.getTime() + 60 * 60 * 1000; // at least 1h notice
-  return SLOTS.filter((s) => {
-    const [h, m] = s.split(":").map(Number);
+function isTimeOk(iso, hhmm, now = new Date()) {
+  const m = /^(\d{2}):(\d{2})$/.exec(hhmm || "");
+  if (!m) return false;
+  const mins = (+m[1]) * 60 + (+m[2]);
+  if (mins < OPEN_MIN || mins > CLOSE_MIN) return false;
+  if (iso === todayISO()) {
     const dt = new Date(now);
-    dt.setHours(h, m, 0, 0);
-    return dt.getTime() > cutoff;
-  });
-}
-
-function renderSlots() {
-  const iso = $("#fDate").value || todayISO();
-  const slots = availableSlots(iso);
-  const sel = $("#fTime");
-  sel.innerHTML = slots.length
-    ? slots.map((s) => `<option value="${s}">${fmtTime(s)}</option>`).join("")
-    : `<option value="" disabled>${t("res.todayFull")}</option>`;
+    dt.setHours(+m[1], +m[2], 0, 0);
+    if (dt.getTime() <= now.getTime() + 60 * 60 * 1000) return false; // 1h notice
+  }
+  return true;
 }
 function renderGuests() {
   $("#fGuests").innerHTML = Array.from({ length: 10 }, (_, i) => {
@@ -129,7 +116,7 @@ function applyLang() {
   });
   document.documentElement.lang = lang;
   $("#langBtn").textContent = lang === "fr" ? "EN" : "FR";
-  renderSlots(); renderGuests();
+  renderGuests();
 }
 
 function showError(msg) {
@@ -142,56 +129,21 @@ function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
 function buildOwnerEmail(d) {
   const dateFR = new Date(d.date + "T12:00:00")
     .toLocaleDateString("fr-CA", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-  const dateEN = new Date(d.date + "T12:00:00")
-    .toLocaleDateString("en-CA", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
   const timeFR = d.time.replace(":", " h ");
-  const timeEN = fmtTimeEN(d.time);
   const gFR = d.guests === 1 ? "1 personne" : `${d.guests} personnes`;
-  const gEN = d.guests === 1 ? "1 guest" : `${d.guests} guests`;
-  const acceptBody =
-`Bonjour ${d.name},
 
-Bonne nouvelle! Votre réservation pour ${gFR} le ${dateFR} à ${timeFR} au restaurant Chez Lan est confirmée.
+  // Accept/refuse links: open the respond page with the booking pre-filled.
+  // The owner taps the big button there and the client gets the reply.
+  const respondBase = "https://restaurantchezlan.github.io/repondre.html";
+  const qp = (a) => respondBase +
+    `?a=${a}` +
+    `&to=${encodeURIComponent(d.email)}` +
+    `&n=${encodeURIComponent(d.name)}` +
+    `&d=${d.date}` +
+    `&t=${encodeURIComponent(d.time)}` +
+    `&g=${d.guests}` +
+    `&p=${encodeURIComponent(d.phone)}`;
 
-Au plaisir de vous accueillir!
-
-Chez Lan
-1421 Chemin Gascon, Terrebonne
-${RESTO_PHONE}
-
----
-Hello ${d.name},
-
-Good news! Your reservation for ${gEN} on ${dateEN} at ${timeEN} at Chez Lan restaurant is confirmed.
-
-We look forward to welcoming you!
-
-Chez Lan
-1421 Chemin Gascon, Terrebonne
-${RESTO_PHONE}`;
-  const declineBody =
-`Bonjour ${d.name},
-
-Malheureusement, nous ne pouvons pas accepter votre demande de réservation pour ${gFR} le ${dateFR} à ${timeFR}.
-
-Appelez-nous au ${RESTO_PHONE} et il nous fera plaisir de vous trouver un autre moment.
-
-Merci de votre compréhension,
-Chez Lan
-
----
-Hello ${d.name},
-
-Unfortunately, we cannot accept your reservation request for ${gEN} on ${dateEN} at ${timeEN}.
-
-Please call us at ${RESTO_PHONE} and we will be happy to find another time for you.
-
-Thank you for your understanding,
-Chez Lan`;
-
-  // NOTE: no mailto: links here — Gmail doesn't linkify long mailto: URLs,
-  // so the owner gets clean copy-paste reply templates instead.
-  // Reply-To is the client (email field), so hitting "Reply" addresses them.
   return {
     _subject: `Nouvelle réservation — ${d.name} — ${dateFR} ${timeFR}`,
     Nom: d.name,
@@ -202,20 +154,14 @@ Chez Lan`;
     Convives: gFR,
     Notes: d.notes || "—",
     "Repondre au client — accepter ou refuser":
-`✅ POUR ACCEPTER :
-Appuyez sur « Répondre » (le courriel ira directement au client : ${d.email}), puis copiez-collez ce texte :
+`✅ ACCEPTER : ouvrez ce lien, vérifiez le message, puis envoyez —
+${qp("accept")}
 
-${acceptBody}
+❌ REFUSER : ouvrez ce lien, vérifiez le message, puis envoyez —
+${qp("refuse")}
 
-———————————————
-
-❌ POUR REFUSER :
-Appuyez sur « Répondre », puis copiez-collez ce texte :
-
-${declineBody}
-
-———————————————
-Le client est aussi joignable par téléphone au ${d.phone}.`,
+Le message au client est déjà rédigé sur la page, en français et en anglais.
+Client aussi joignable au ${d.phone} / ${d.email}.`,
     _template: "table",
     _captcha: "false",
     _cc: "minhtuan9@yahoo.com",
@@ -235,8 +181,8 @@ async function onSubmit(ev) {
     email: $("#fEmail").value.trim(),
     notes: $("#fNotes").value.trim()
   };
-  if (!d.date || !d.time || !d.guests || !d.name || d.phone.replace(/\D/g, "").length < 7 || !validEmail(d.email)) {
-    showError(t("res.errorFields"));
+  if (!d.date || !isTimeOk(d.date, d.time) || !d.guests || !d.name || d.phone.replace(/\D/g, "").length < 7 || !validEmail(d.email)) {
+    showError(!isTimeOk(d.date, d.time) ? t("res.badTime") : t("res.errorFields"));
     return;
   }
   const btn = $("#submitBtn");
@@ -284,7 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
   dateEl.min = today;
   dateEl.max = `${max.getFullYear()}-${String(max.getMonth() + 1).padStart(2, "0")}-${String(max.getDate()).padStart(2, "0")}`;
   dateEl.value = today;
-  dateEl.addEventListener("change", renderSlots);
   $("#langBtn").addEventListener("click", () => { lang = lang === "fr" ? "en" : "fr"; applyLang(); });
   $("#resForm").addEventListener("submit", onSubmit);
   $("#againBtn").addEventListener("click", () => {
@@ -292,10 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
     $("#resForm").style.display = "block";
     $("#resForm").reset();
     dateEl.value = todayISO();
-    renderSlots(); renderGuests();
+    renderGuests();
   });
   applyLang();
 });
 
 // Exported for node QA
-if (typeof module !== "undefined") module.exports = { availableSlots, fmtTime, fmtDateLong, guestsLabel, buildOwnerEmail, SLOTS };
+if (typeof module !== "undefined") module.exports = { isTimeOk, fmtTime, fmtDateLong, guestsLabel, buildOwnerEmail };
