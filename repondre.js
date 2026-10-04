@@ -23,7 +23,7 @@ if (typeof require !== "undefined" && typeof acceptSubject === "undefined") {
        3. Account → API Keys → copy the Public Key
        4. Paste the three values into EMAILJS below and redeploy.
 */
-const EMAILJS = { publicKey: "", serviceId: "", templateId: "" };
+const EMAILJS = { publicKey: "cCsaILV3qykpJRUkq", serviceId: "chezlan_email", templateId: "template_chezlan" };
 const RESTO_SENDER = "andypwndbunny@gmail.com";
 
 const I18N = {
